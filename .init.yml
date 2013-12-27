@@ -1,0 +1,17 @@
+python: 2.7
+
+install:
+  - pip install -U nose
+  - pip install -U devicewrapper
+  - pip install -U customnoseplugins
+
+before_script:
+  - echo "Before script..."
+  - which nosetests
+
+script:
+  - python run.py --loop 100  
+#- nosetests --with-plan-loader --loop 50 --with-device-config --with-local-report --verbosity 2
+
+after_script:
+  - echo "after_script"
