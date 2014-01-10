@@ -10,7 +10,7 @@ before_script:
   - which nosetests
 
 script:
-  - python run.py --loop 100  
+  - python run.py --loop 200  
 #- nosetests --with-plan-loader --loop 50 --with-device-config --with-local-report --verbosity 2
 
 after_script:
