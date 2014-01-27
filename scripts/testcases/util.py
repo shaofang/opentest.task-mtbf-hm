@@ -71,3 +71,10 @@ def checkSystemWatchers(d):
 def sleep(sec):
     time.sleep(sec)
 
+def setup(d):
+    d.wakeup()
+    d.info
+    backHome(d)
+
+def teardown(d):
+    backHome(d)

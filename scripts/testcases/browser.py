@@ -7,12 +7,11 @@ import util as u
 class BrowserTest(unittest.TestCase):
     def setUp(self):
         super(BrowserTest, self).setUp()
-        d.wakeup()
-        u.backHome(d)
+        u.setup(d)
 
     def tearDown(self):
         super(BrowserTest, self).tearDown()
-        u.backHome(d)
+        u.teardown(d)
 
     def testOpenBrowser_wifi(self):
         self.openBrowser(True)

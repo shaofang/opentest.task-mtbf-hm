@@ -7,12 +7,11 @@ import util as u
 class WeiboTest(unittest.TestCase):
     def setUp(self):
         super(WeiboTest, self).setUp()
-        d.wakeup()
-        u.backHome(d)
+        u.setup(d)
 
     def tearDown(self):
         super(WeiboTest, self).tearDown()
-        u.backHome(d)
+        u.teardown(d)
 
     def testWeibo_wifi(self):
         self.weibo(True)
