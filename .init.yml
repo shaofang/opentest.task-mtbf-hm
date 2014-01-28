@@ -1,9 +1,9 @@
 python: 2.7
 
 install:
-  - pip install -U nose
-  - pip install -U devicewrapper
-  - pip install -U customnoseplugins
+  - pip install -i http://pypi.douban.com/simple -U nose
+  - pip install -i http://pypi.douban.com/simple -U devicewrapper
+  - pip install -i http://pypi.douban.com/simple -U customnoseplugins
 
 before_script:
   - echo "Before script..."

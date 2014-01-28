@@ -23,6 +23,10 @@ class BaiduTest(unittest.TestCase):
 
         if d(text='不要福利').wait.exists(timeout=5000):
             d(text='不要福利').click.wait()
+        if d(text='以后再说').wait.exists(timeout=5000):
+            d(text='以后再说').click.wait()
+        if d(text='以后再说').wait.exists(timeout=2000):
+            d(text='以后再说').click.wait()
 
         #Check if baidu map can be launched successfully
         assert d(text='附近').wait.exists(timeout=10000), 'No enter main map activity'
