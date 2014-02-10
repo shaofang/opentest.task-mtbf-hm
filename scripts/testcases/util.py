@@ -16,16 +16,28 @@ def openWifi(d, flag):
     wifi = d(className='android.widget.LinearLayout').child_by_text('WLAN').sibling(className='android.widget.CheckBox')
     #Should open wifi
     if flag:
-        if not wifi.checked:
-            wifi.click.wait()
-            assert d(className='android.widget.LinearLayout').child_by_text('WLAN').sibling(className='android.widget.CheckBox', checked=True).wait.exists(timeout=10000), "wifi can not be opened"
+        i = 0
+        while not wifi.checked and i < 2:
+            d(text='WLAN')[1].click.wait()
             sleep(3)
+            i = i + 1
+        assert wifi.checked is True, 'wifi can not be opened'
+        #if not wifi.checked:
+        #    d(text='WLAN')[1].click.wait()
+        #    assert d(className='android.widget.LinearLayout').child_by_text('WLAN').sibling(className='android.widget.CheckBox', checked=True).wait.exists(timeout=10000), "wifi can not be opened"
+        #    sleep(3)
     #Should close the wifi
     else:
-        if wifi.checked:
-            wifi.click.wait()
-            assert d(className='android.widget.LinearLayout').child_by_text('WLAN').sibling(className='android.widget.CheckBox', checked=False).wait.exists(timeout=10000), "wifi can not be closed"
+        i = 0
+        while wifi.checked and i < 2:
+            d(text='WLAN')[1].click.wait()
             sleep(3)
+            i = i + 1
+        assert wifi.checked is False, 'wifi can not be closed'
+        #if wifi.checked:
+        #    d(text='WLAN')[1].click.wait()
+        #    assert d(className='android.widget.LinearLayout').child_by_text('WLAN').sibling(className='android.widget.CheckBox', checked=False).wait.exists(timeout=10000), "wifi can not be closed"
+        #    sleep(3)
         
     #Wait for network switching
     d.press('home')
@@ -62,6 +74,8 @@ def fetchText():
 def registerSysWatchers(d):
     d.watchers.remove()
     d.watcher("AUTO_FC_WHEN_ANR").when(textContains="isn't responding").when(text="Wait").click(text="OK")
+    d.watcher("WEIBO_SEARCH_FRIENDS").when(text="搜寻好友").when(text="Skip").click(text="Skip")
+    d.watcher("WEIBO_UPDATE").when(text="Download").when(text="Cancel").click(text="Cancel")
 
 def checkSystemWatchers(d):
     if d.watcher("AUTO_FC_WHEN_ANR").triggered:
@@ -74,7 +88,9 @@ def sleep(sec):
 def setup(d):
     d.wakeup()
     d.info
+    registerSysWatchers(d)
     backHome(d)
 
 def teardown(d):
+    checkSystemWatchers(d)
     backHome(d)
