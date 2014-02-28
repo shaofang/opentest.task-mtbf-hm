@@ -23,22 +23,23 @@ class MessageTest(unittest.TestCase):
         assert d(text='New message', className='android.widget.Button').wait.exists(timeout=5000), 'can not launch message in 3s'
 
         #Delete messages if there is any message.
-        if not d(textStartsWith="No conversations").wait.exists(timeout=2000):
-            d(className='android.view.View').long_click()
-            if d(text="Check All").wait.exists(timeout=3000):
-                d(text="Check All").click.wait()
-            d(text="Delete").click.wait()
-            d(text="Delete").click.wait()
-            assert d(textStartsWith="No conversations").wait.exists(timeout=10000), 'Delete messages failed'
+        #if not d(textStartsWith="No conversations").wait.exists(timeout=2000):
+        #    d(className='android.view.View').long_click()
+        #    if d(text="Check All").wait.exists(timeout=3000):
+        #        d(text="Check All").click.wait()
+        #    d(text="Delete").click.wait()
+        #    d(text="Delete").click.wait()
+        #    assert d(textStartsWith="No conversations").wait.exists(timeout=10000), 'Delete messages failed'
 
         #Compose message
-        d(text='New message').click.wait()
+        d(text='New message', className='android.widget.Button').click.wait()
         d(className='android.widget.EditText', index=0).set_text(str_receiver)
         assert d(text=str_receiver).wait.exists(timeout=10000), 'receiver number input error'            
         d(className='android.widget.EditText', index=1).set_text(str_content)
         assert d(text=str_content).wait.exists(timeout=10000), 'content input error'            
         d(descriptionContains='end message').click.wait()
-        assert d(text='Sending').wait.exists(timeout=3000), 'Not begin to sending in 3s'
+        #assert d(text='Sending').wait.exists(timeout=3000), 'Not begin to sending in 3s'
+        u.sleep(3)
         assert d(text='Sending').wait.gone(timeout=20000), 'sms sending failed in 20s'
         
         #assert d(text='Received').wait.exists(timeout=20000), 'sms sending failed in 20s'
@@ -50,14 +51,14 @@ class MessageTest(unittest.TestCase):
         str_content = 'Message Test Content'
 
         #Start Messaging and check if sucessful
-        assert d.exists(text='Messaging') , 'message app not appear on the home screen'
-        d(text='Messaging').click.wait()
+        d.start_activity(component='com.android.mms/.ui.MmsTabActivity')
+        assert d(text='New message', className='android.widget.Button').wait.exists(timeout=5000), 'can not launch message in 3s'
 
         #Delete messages if there is any message.
         if not d(text="No conversations.").wait.exists(timeout=1000):
             d(className='android.view.View').long_click()
-            if d(text="Check All").wait.exists(timeout=3000):
-                d(text="Check All").click.wait()
+            if d(text="Select all").wait.exists(timeout=3000):
+                d(text="Select all").click.wait()
             d(text="Delete").click.wait()
             d(text="Delete").click.wait()
 
@@ -83,10 +84,9 @@ class MessageTest(unittest.TestCase):
 
         #Send MMS
         d(descriptionContains='end message').click.wait()
-        assert d(text='Sending').wait.exists(timeout=5000), 'No sending status'
+        assert d(text='Sending').wait.exists(timeout=10000), 'No sending status in 10s'
         u.sleep(20)
-        assert d(text='Sending').wait.gone(timeout=40000), 'MMS sending failed in 60s'
-
+        assert d(text='Sending').wait.gone(timeout=70000), 'MMS sending failed in 90s'
 
 
             

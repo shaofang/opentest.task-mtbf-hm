@@ -39,6 +39,6 @@ class PhoneTest(unittest.TestCase):
         assert d(textStartsWith="0:1").wait.exists(timeout=15000), 'Call duration should be 10 secs'
 
         d(className='android.widget.Button', index=1).click.wait()
-        assert d(text='Keypad').wait.exists(timeout=5000), 'Should back to dialer in 5s.'
+        assert d(text='Keypad').wait.exists(timeout=10000), 'Should Hangup in 10s.'
 
 

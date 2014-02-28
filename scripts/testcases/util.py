@@ -43,11 +43,12 @@ def openWifi(d, flag):
     d.press('home')
 
 def backHome(d):
-	d.press('back')
-	sleep(1)
-	d.press('back')
-	sleep(1)
-	d.press('home')
+    d.press('back')
+    sleep(1)
+    d.press('back')
+    sleep(1)
+    d.press('back')
+    d.press('home')
 
 def fetchText():
     url = 'http://andymatthews.net/thought/'

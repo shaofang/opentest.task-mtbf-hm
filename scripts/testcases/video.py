@@ -27,8 +27,8 @@ class VideoTest(unittest.TestCase):
         d(text='bbb.mp4').click.wait()
         assert d(text='bbb.mp4').wait.gone(timeout=3000), 'Not switch to playing'
 
-        #After finish playing, should back to video list
-        u.sleep(600)
+        #Wait to finish playing, and should back to video list
+        u.sleep(610)
         assert d(text='bbb.mp4').wait.exists(timeout=10000)
         d.press('back')
         

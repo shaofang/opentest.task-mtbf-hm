@@ -29,7 +29,7 @@ class ContactTest(unittest.TestCase):
         #New contact
         d(text='New contact', className='android.widget.Button').click.wait()
 
-        d(text='Create  contact', className='android.widget.TextView').wait.exists(timeout=5000), 'Can not switch to create contact activity in 5s'
+        assert d(text='Create  contact', className='android.widget.TextView').wait.exists(timeout=5000), 'Can not switch to create contact activity in 5s'
         d(text='Name', className='android.widget.EditText').set_text(c_name)
         assert d(text=c_name), 'Input name failed.'
         d(text='Phone', className='android.widget.EditText').set_text(c_number)
@@ -37,8 +37,8 @@ class ContactTest(unittest.TestCase):
         d(text='OK', className='android.widget.Button').click.wait()	
 
         #Delete the contact
-        assert d(text='About').wait.exists(timeout=3000), 'Add contact failed'
+        assert d(text='About').wait.exists(timeout=5000), 'Add contact failed'
         d.press('menu')
         d(text='Delete', className='android.widget.TextView').click.wait()
         d(text='Delete', className='android.widget.Button').click.wait()
-        assert d(text='New contact').wait.exists(timeout=3000), 'Back to contacts list in 3s'
+        assert d(text='New contact').wait.exists(timeout=5000), 'Back to contacts list in 5s'

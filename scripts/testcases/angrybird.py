@@ -16,8 +16,8 @@ class AngrybirdTest(unittest.TestCase):
     def testLaunch(self):
         #Launch game
         d.start_activity(component='com.rovio.angrybirdsstarwars.ads.iap/com.rovio.fusion.App')
-        u.sleep(30)
-        d.expect('loaded.png', timeout=20, msg='failed to load')
+        u.sleep(40)
+        d.expect('loaded.png', timeout=20, msg='Fail to load app')
         d.press('back')
-        d.expect('ok.png', timeout=10, msg='failed to find ok button')
+        d.expect('ok.png', timeout=10, msg='Fail to find ok button')
         d.click(788,385)
